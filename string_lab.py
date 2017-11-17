@@ -2,7 +2,7 @@
 '''Basic string exercises'''
 
 def donuts(count):
-    '''Takes one argument <count> (int), where <count> is the number of donuts.
+    '''Takes one argument <count>, where <count> is the number of donuts.
     Returns a string of the form 'Number of donuts: <count>'
     
     If the <count> is 10 or more,
@@ -12,7 +12,18 @@ def donuts(count):
         donuts(5) >>> 'Number of donuts: 5'
         donuts(25) >>> 'Number of donuts: Many!'
     '''
-    return
+
+    try:
+        if count >= 0 and count < 10:
+            return 'Number of donuts: {0}'.format(count)
+        elif count < 0:
+            return 'None'
+        else:
+            return 'Number of donuts: Many!'
+    except TypeError:
+        return 'Expected integer'
+    
+    
     
 def both_ends(the_string):
     '''Takes one argument <the_string> (str),
@@ -80,7 +91,12 @@ def sample_data():
     test_sample_data(donuts(9), 'Number of donuts: 9' )
     test_sample_data(donuts(10), 'Number of donuts: Many!' )
     test_sample_data(donuts(19), 'Number of donuts: Many!' )
-
+    test_sample_data(donuts('one'), 'Expected integer' )
+    test_sample_data(donuts(1.5), 'Number of donuts: 1.5' )
+    test_sample_data(donuts(-1), 'None')
+    test_sample_data(donuts(0), 'Number of donuts: 0' )
+    test_sample_data(donuts([1,2]), 'Expected integer' )
+    
     print()
     print(format(' Test both_ends ', '*^60'))
     test_sample_data(both_ends('spring'), 'spng')
