@@ -55,7 +55,15 @@ def fix_start(the_string):
     Example:
         fix_start('babble') >>> 'ba**le'
     '''
-    return
+    if isinstance(the_string, str) :
+        if len(the_string) > 1:
+            first_char = the_string[0] # Set first char aside
+            play_str = the_string[1:] # assign the rest of the string 
+            return first_char + play_str.replace(first_char, '*')
+        else:
+            return the_string
+    else:
+        return 'Expected string'
 
 def mix_up(string_one, string_two):
     '''Takes two arguments <string_one> and <string_two> (str),
@@ -122,6 +130,12 @@ def sample_data():
     test_sample_data(fix_start('aadvark'), 'a*dv*rk')
     test_sample_data(fix_start('google'), 'goo*le')
     test_sample_data(fix_start('donut'), 'donut')
+    test_sample_data(fix_start(''), '')
+    test_sample_data(fix_start('a'), 'a')
+    test_sample_data(fix_start(1), 'Expected string')
+    test_sample_data(fix_start((1,)), 'Expected string')
+    test_sample_data(fix_start(1.5), 'Expected string')
+    test_sample_data(fix_start(['1']), 'Expected string')
 
     print()
     print(format(' Test mix_up ', '*^60'))
