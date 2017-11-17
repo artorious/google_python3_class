@@ -62,7 +62,12 @@ def test_sample_data(got, expected):
         
     Prints what each function returns vs. what it's suppsed to return
     '''
-    pass
+    if got == expected:
+        result = 'PASSED'
+    else:
+        result = 'FAILED'
+    print('{0} got: {1}  but expected: {2}'.format(result, repr(got), 
+        repr(expected)))
           
 def sample_data():
     '''Calls functions donuts(), both_ends(), fix_start() and mix_up() with 
