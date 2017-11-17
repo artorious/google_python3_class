@@ -70,7 +70,7 @@ def fix_start(the_string):
 def mix_up(string_one, string_two):
     '''Takes two arguments <string_one> and <string_two> (str),
     returns a single space separated string '<string_one> <string_two>' with
-    the first 2 chars of each string swapped.
+    the first 2 alpha-numeric chars of each string swapped.
 
     Example:
         mix_up('mix', 'pod') >>> 'pox mid'
@@ -78,7 +78,17 @@ def mix_up(string_one, string_two):
     
     NOTE: Assume <string_one> and <string_two> are length 2 or more
     '''
-    return
+    
+    if isinstance(string_one, str) and isinstance(string_two, str):
+        if len(string_one.strip()) > 2 and len(string_two.strip()) > 2:
+            string_one, string_two = string_one.strip(), string_two.strip() # Strip lead & trailing whitespace
+            string_one_swaped = string_two[:2] + string_one[2:]
+            string_two_swaped = string_one[:2] + string_two[2:]
+            return '{0} {1}'.format(string_one_swaped, string_two_swaped)
+        else:
+            return 'Expected strings with at least 3 alpha-numeric chars'
+    else:
+        return 'Expected string'
 
 def test_sample_data(got, expected):
     '''Takes two arguments <got> and <expected> and performs simple tests 
@@ -150,6 +160,19 @@ def sample_data():
     test_sample_data(mix_up('dog', 'dinner'), 'dig donner' )
     test_sample_data(mix_up('gnash', 'sport'), 'spash gnort' )
     test_sample_data(mix_up('pezzy', 'firm'), 'fizzy perm' )
+    test_sample_data(mix_up('  mix', 'pod  '), 'pox mid' )
+    test_sample_data(mix_up('mix', '  pod'), 'pox mid' )
+    test_sample_data(mix_up('a', 'b'), 'Expected strings with at least 3 alpha-numeric chars' )
+    test_sample_data(mix_up('ab', 'ba'), 'Expected strings with at least 3 alpha-numeric chars' )
+    test_sample_data(mix_up('ab', 'ba'), 'Expected strings with at least 3 alpha-numeric chars' )
+    test_sample_data(mix_up('ab   ', '    ba'), 'Expected strings with at least 3 alpha-numeric chars' )
+    test_sample_data(mix_up('abc   ', '    ba'), 'Expected strings with at least 3 alpha-numeric chars' )
+    test_sample_data(mix_up('', ''), 'Expected strings with at least 3 alpha-numeric chars' )
+    test_sample_data(mix_up('      ', ' '), 'Expected strings with at least 3 alpha-numeric chars')
+    test_sample_data(mix_up(1, ''), 'Expected string' )
+    test_sample_data(mix_up('', 1.5), 'Expected string' )
+    test_sample_data(mix_up([1], ''), 'Expected string' )
+    test_sample_data(mix_up('', (1,2)), 'Expected string' )
     
 
 
