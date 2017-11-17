@@ -38,8 +38,8 @@ def both_ends(the_string):
         both_ends('a') >>> ''
     '''
     if isinstance(the_string, str):
-        if len(the_string.strip()) > 1: # Check for alpha-numeric chars excluding trailing space
-            the_string = the_string.strip() # strip off trailing space and assign
+        if len(the_string.strip()) > 1: # Check for alpha-numeric chars excluding leading & trailing whitespace
+            the_string = the_string.strip() # strip off leading & trailing whitespace and assign
             first_two_chars = the_string[:2]
             last_two_chars = the_string[-2:]
             return first_two_chars + last_two_chars
@@ -57,8 +57,8 @@ def fix_start(the_string):
         fix_start('babble') >>> 'ba**le'
     '''
     if isinstance(the_string, str) :
-        if len(the_string.strip()) > 1: # Check for alpha-numeric chars excluding trailing space
-            the_string = the_string.strip() # strip off trailing space and assign
+        if len(the_string.strip()) > 1: # Check for alpha-numeric chars excluding leading & trailing whitespace
+            the_string = the_string.strip() # strip off leading & trailing whitespace and assign
             first_char = the_string[0] # Set first char aside
             play_str = the_string[1:] # assign the rest of the string 
             return first_char + play_str.replace(first_char, '*')
