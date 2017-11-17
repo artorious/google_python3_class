@@ -73,9 +73,34 @@ def sample_data():
     '''Calls functions donuts(), both_ends(), fix_start() and mix_up() with 
     interesting inputs.
     
-    Uses test_sample_data() to check if each result is correct or not
+    Uses test_sample_data() to check result against expected output
     '''
-    pass
+    print(format(' Test Donut Count ', '*^60'))
+    test_sample_data(donuts(4), 'Number of donuts: 4' )
+    test_sample_data(donuts(9), 'Number of donuts: 9' )
+    test_sample_data(donuts(10), 'Number of donuts: Many!' )
+    test_sample_data(donuts(19), 'Number of donuts: Many!' )
+
+    print()
+    print(format(' Test both_ends ', '*^60'))
+    test_sample_data(both_ends('spring'), 'spng')
+    test_sample_data(both_ends('hello'), 'helo')
+    test_sample_data(both_ends('a'), '')
+    test_sample_data(both_ends('xyz'), 'xyyz')
+
+    print()
+    print(format(' Test fix_start ', '*^60'))
+    test_sample_data(fix_start('babble'), 'ba**le')
+    test_sample_data(fix_start('aadvark'), 'a*dv*rk')
+    test_sample_data(fix_start('google'), 'goo*le')
+    test_sample_data(fix_start('donut'), 'donut')
+
+    print()
+    print(format(' Test mix_up ', '*^60'))
+    test_sample_data(mix_up('mix', 'pod'), 'pox mid' )
+    test_sample_data(mix_up('dog', 'dinner'), 'dig donner' )
+    test_sample_data(mix_up('gnash', 'sport'), 'spash gnort' )
+    test_sample_data(mix_up('pezzy', 'firm'), 'fizzy perm' )
 
 if __name__ == '__main__':
     sample_data()
