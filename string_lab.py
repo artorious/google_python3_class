@@ -13,18 +13,16 @@ def donuts(count):
         donuts(25) >>> 'Number of donuts: Many!'
     '''
 
-    try:
+    try: # Check if  <count> is int
         if count >= 0 and count < 10:
-            return 'Number of donuts: {0}'.format(count)
+            return 'Number of donuts: {0}'.format(str(count))
         elif count < 0:
             return 'None'
         else:
             return 'Number of donuts: Many!'
     except TypeError:
         return 'Expected integer'
-    
-    
-    
+     
 def both_ends(the_string):
     '''Takes one argument <the_string> (str),
     returns a string made of the first 2 and last 2 chars of the original 
@@ -39,7 +37,15 @@ def both_ends(the_string):
         both_ends('tea') >>> 'teea'
         both_ends('a') >>> ''
     '''
-    return
+    if isinstance(the_string, str):
+        if len(the_string) > 1:
+            first_two_chars = the_string[:2]
+            last_two_chars = the_string[-2:]
+            return first_two_chars + last_two_chars
+        else:
+            return ''
+    else:
+        return 'Expected string'
 
 def fix_start(the_string):
     '''Takes one argument <the_string> (str),
@@ -102,7 +108,13 @@ def sample_data():
     test_sample_data(both_ends('spring'), 'spng')
     test_sample_data(both_ends('hello'), 'helo')
     test_sample_data(both_ends('a'), '')
+    test_sample_data(both_ends('an'), 'anan')
+    test_sample_data(both_ends(''), '')
     test_sample_data(both_ends('xyz'), 'xyyz')
+    test_sample_data(both_ends(1), 'Expected string')
+    test_sample_data(both_ends((1,)), 'Expected string')
+    test_sample_data(both_ends(1.5), 'Expected string')
+    test_sample_data(both_ends(['1']), 'Expected string')
 
     print()
     print(format(' Test fix_start ', '*^60'))
