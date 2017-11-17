@@ -25,10 +25,10 @@ def donuts(count):
      
 def both_ends(the_string):
     '''Takes one argument <the_string> (str),
-    returns a string made of the first 2 and last 2 chars of the original 
+    returns a string made of the first 2 and last 2 alpha-numeric chars of the original 
     string.
 
-    If the string length is less than 2 chars,
+    If the string length is less than 2 alpha-numeric chars,
     returns an empty string
 
     Examples:
@@ -38,7 +38,8 @@ def both_ends(the_string):
         both_ends('a') >>> ''
     '''
     if isinstance(the_string, str):
-        if len(the_string) > 1:
+        if len(the_string.strip()) > 1: # Check for alpha-numeric chars excluding trailing space
+            the_string = the_string.strip() # strip off trailing space and assign
             first_two_chars = the_string[:2]
             last_two_chars = the_string[-2:]
             return first_two_chars + last_two_chars
@@ -49,19 +50,20 @@ def both_ends(the_string):
 
 def fix_start(the_string):
     '''Takes one argument <the_string> (str),
-    returns a string where all occurences of it's first char have been changed
-    to '*', except for the first char itself.
+    returns a string where all occurences of it's first alpha-numeric char have 
+    been changed to '*', except for the first alpha-numeric char itself.
 
     Example:
         fix_start('babble') >>> 'ba**le'
     '''
     if isinstance(the_string, str) :
-        if len(the_string) > 1:
+        if len(the_string.strip()) > 1: # Check for alpha-numeric chars excluding trailing space
+            the_string = the_string.strip() # strip off trailing space and assign
             first_char = the_string[0] # Set first char aside
             play_str = the_string[1:] # assign the rest of the string 
             return first_char + play_str.replace(first_char, '*')
         else:
-            return the_string
+            return the_string.strip()
     else:
         return 'Expected string'
 
@@ -91,7 +93,7 @@ def test_sample_data(got, expected):
         result = 'PASSED'
     else:
         result = 'FAILED'
-    print('{0} got: {1}  but expected: {2}'.format(result, repr(got), 
+    print('{0} got: {1}  --> expected: {2}'.format(result, repr(got), 
         repr(expected)))
           
 def sample_data():
@@ -116,7 +118,10 @@ def sample_data():
     test_sample_data(both_ends('spring'), 'spng')
     test_sample_data(both_ends('hello'), 'helo')
     test_sample_data(both_ends('a'), '')
+    test_sample_data(both_ends('   a   '), '')
     test_sample_data(both_ends('an'), 'anan')
+    test_sample_data(both_ends('   an    '), 'anan')
+    test_sample_data(both_ends('            '), '')
     test_sample_data(both_ends(''), '')
     test_sample_data(both_ends('xyz'), 'xyyz')
     test_sample_data(both_ends(1), 'Expected string')
@@ -130,6 +135,8 @@ def sample_data():
     test_sample_data(fix_start('aadvark'), 'a*dv*rk')
     test_sample_data(fix_start('google'), 'goo*le')
     test_sample_data(fix_start('donut'), 'donut')
+    test_sample_data(fix_start('   donuts   '), 'donuts')
+    test_sample_data(fix_start('     '), '')
     test_sample_data(fix_start(''), '')
     test_sample_data(fix_start('a'), 'a')
     test_sample_data(fix_start(1), 'Expected string')
@@ -143,6 +150,8 @@ def sample_data():
     test_sample_data(mix_up('dog', 'dinner'), 'dig donner' )
     test_sample_data(mix_up('gnash', 'sport'), 'spash gnort' )
     test_sample_data(mix_up('pezzy', 'firm'), 'fizzy perm' )
+    
+
 
 if __name__ == '__main__':
     sample_data()
