@@ -90,10 +90,10 @@ def mix_up(string_one, string_two):
         return 'Expected string'
 
 def verbings(the_string):
-    '''Takes one str argument <the_string>, if it's length is at least 3,
-    adds 'ing' to it's end. Unless it already ends in 'ing', in which case
-    adds 'ly' instead. If <the_string> length is less than 3, it's left 
-    unchanged.
+    '''Takes one str argument <the_string>, if it's length is at least 3 
+    alpha-numeric chars, adds 'ing' to it's end. Unless it already ends in 
+    'ing', in which case adds 'ly' instead. If <the_string> length is less 
+    than 3 alpha-numeric chars, it's left unchanged.
 
     Returns the resulting string.
     '''
@@ -112,10 +112,11 @@ def not_bad(the_string):
 
 
 def front_back(string_one, string_two):
-    '''Takes two str arguments <string_one> and <string_two>, for each string,
-    divide into two halves. If the length is even(The front and back halves 
-    are the same length.). If the length is odd, the extra char goes in the 
-    front half. E.g. 'abcde', the front half is 'abc', the back half 'de'.
+    '''Takes two str arguments <string_one> and <string_two>, for each 
+    alpha-numeric string, divide into two halves. If the length is even(The 
+    front and back halves are the same length.). If the length is odd, the 
+    extra char goes in the front half. E.g. 'abcde', the front half is 'abc', 
+    the back half 'de'.
     
     Returns a string of the form, 
         string_one-front + string_two-front + string_one-back + string_two-back
@@ -145,7 +146,7 @@ def sample_data():
     
     Uses test_sample_data() to check result against expected output
     '''
-    print(format(' Test Donut Count ', '*^60'))
+    print(format(' Test Donut() ', '*^60'))
     test_sample_data(donuts(4), 'Number of donuts: 4' )
     test_sample_data(donuts(9), 'Number of donuts: 9' )
     test_sample_data(donuts(10), 'Number of donuts: Many!' )
@@ -157,7 +158,7 @@ def sample_data():
     test_sample_data(donuts([1,2]), 'Expected integer' )
     
     print()
-    print(format(' Test both_ends ', '*^60'))
+    print(format(' Test both_ends() ', '*^60'))
     test_sample_data(both_ends('spring'), 'spng')
     test_sample_data(both_ends('hello'), 'helo')
     test_sample_data(both_ends('a'), '')
@@ -173,7 +174,7 @@ def sample_data():
     test_sample_data(both_ends(['1']), 'Expected string')
 
     print()
-    print(format(' Test fix_start ', '*^60'))
+    print(format(' Test fix_start() ', '*^60'))
     test_sample_data(fix_start('babble'), 'ba**le')
     test_sample_data(fix_start('aadvark'), 'a*dv*rk')
     test_sample_data(fix_start('google'), 'goo*le')
@@ -188,7 +189,7 @@ def sample_data():
     test_sample_data(fix_start(['1']), 'Expected string')
 
     print()
-    print(format(' Test mix_up ', '*^60'))
+    print(format(' Test mix_up() ', '*^60'))
     test_sample_data(mix_up('mix', 'pod'), 'pox mid' )
     test_sample_data(mix_up('dog', 'dinner'), 'dig donner' )
     test_sample_data(mix_up('gnash', 'sport'), 'spash gnort' )
@@ -206,6 +207,44 @@ def sample_data():
     test_sample_data(mix_up('', 1.5), 'Expected string' )
     test_sample_data(mix_up([1], ''), 'Expected string' )
     test_sample_data(mix_up('', (1,2)), 'Expected string' )
+    
+    print()
+    print(format(' Test verbing() ', '*^60'))
+    test_sample_data(verbings('hail'), 'hailing')
+    test_sample_data(verbings('  hail   '), 'hailing')
+    test_sample_data(verbings('swiming'), 'swimingly')
+    test_sample_data(verbings('  swiming   '), 'swimingly')
+    test_sample_data(verbings('do'), 'do')
+    test_sample_data(verbings('  do   '), 'do')
+    test_sample_data(verbings(''), '')
+    test_sample_data(verbings('      '), '')
+    test_sample_data(verbings(1), 'Expected string')
+    test_sample_data(verbings(1.5), 'Expected string')
+    test_sample_data(verbings([1.5]), 'Expected string')
+
+    print()
+    print(format(' Test not_bad() ', '*^60'))
+    test_sample_data(not_bad('This movie is not so bad'), 'This movie is good')
+    test_sample_data(not_bad('This dinner is not that bad!'), 'This dinner is good!')
+    test_sample_data(not_bad('This tea is not hot'), 'This tea is not hot')
+    test_sample_data(not_bad("It's bad yet not"), "It's bad yet not")
+    test_sample_data(not_bad(''), '')
+    test_sample_data(not_bad('        '), '')
+    test_sample_data(not_bad(1), 'Expected string')
+    test_sample_data(not_bad(1.5), 'Expected string')
+    test_sample_data(not_bad(['a']), 'Expected string')
+
+    print()
+    print(format(' Test front_back() ', '*^60'))
+    test_sample_data(front_back('abcd', 'xy'), 'abxcdy')
+    test_sample_data(front_back('  abcd', 'xy     '), 'abxcdy')
+    test_sample_data(front_back('abcd', '' ), 'abcd')
+    test_sample_data(front_back('', 'abcd' ), 'abcd')
+    test_sample_data(front_back('abcde', 'xyz'), 'abcxydez')
+    test_sample_data(front_back('Kitten', 'Donut'), 'KitDontenut')
+    test_sample_data(front_back('abcd', 12 ), 'Expected strings')
+    test_sample_data(front_back(12, 'abcd' ), 'Expected strings')
+    test_sample_data(front_back([12], 'abcd' ), 'Expected strings')
     
 
 
