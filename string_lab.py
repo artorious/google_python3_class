@@ -2,7 +2,7 @@
 '''Basic string exercises'''
 
 def donuts(count):
-    '''Takes one argument <count>, where <count> is the number of donuts.
+    '''Takes one int argument <count>, the number of donuts.
     Returns a string of the form 'Number of donuts: <count>'
     
     If the <count> is 10 or more,
@@ -24,7 +24,7 @@ def donuts(count):
         return 'Expected integer'
      
 def both_ends(the_string):
-    '''Takes one argument <the_string> (str),
+    '''Takes one str argument <the_string> ,
     returns a string made of the first 2 and last 2 alpha-numeric chars of the original 
     string.
 
@@ -49,7 +49,7 @@ def both_ends(the_string):
         return 'Expected string'
 
 def fix_start(the_string):
-    '''Takes one argument <the_string> (str),
+    '''Takes one str argument <the_string> ,
     returns a string where all occurences of it's first alpha-numeric char have 
     been changed to '*', except for the first alpha-numeric char itself.
 
@@ -68,7 +68,7 @@ def fix_start(the_string):
         return 'Expected string'
 
 def mix_up(string_one, string_two):
-    '''Takes two arguments <string_one> and <string_two> (str),
+    '''Takes two str arguments <string_one> and <string_two> ,
     returns a single space separated string '<string_one> <string_two>' with
     the first 2 alpha-numeric chars of each string swapped.
 
@@ -76,7 +76,6 @@ def mix_up(string_one, string_two):
         mix_up('mix', 'pod') >>> 'pox mid'
         mix_up('dog', 'dinner') >>> 'dig donner'
     
-    NOTE: Assume <string_one> and <string_two> are length 2 or more
     '''
     
     if isinstance(string_one, str) and isinstance(string_two, str):
@@ -89,6 +88,40 @@ def mix_up(string_one, string_two):
             return 'Expected strings with at least 3 alpha-numeric chars'
     else:
         return 'Expected string'
+
+def verbings(the_string):
+    '''Takes one str argument <the_string>, if it's length is at least 3,
+    adds 'ing' to it's end. Unless it already ends in 'ing', in which case
+    adds 'ly' instead. If <the_string> length is less than 3, it's left 
+    unchanged.
+
+    Returns the resulting string.
+    '''
+    return
+
+def not_bad(the_string):
+    '''Takes one str argument <the_string>, finds the first appearance of the
+    substring 'not' and 'bad'. If the 'bad' follows the 'not', replaces the 
+    whole 'not'...'bad' substring with 'good'.
+
+    Returns the resulting string.
+    Example:
+        not_bad('This dinner is not that bad!') >>> 'This dinner is good!'
+    '''
+    return
+
+
+def front_back(string_one, string_two):
+    '''Takes two str arguments <string_one> and <string_two>, for each string,
+    divide into two halves. If the length is even(The front and back halves 
+    are the same length.). If the length is odd, the extra char goes in the 
+    front half. E.g. 'abcde', the front half is 'abc', the back half 'de'.
+    
+    Returns a string of the form, 
+        string_one-front + string_two-front + string_one-back + string_two-back
+    '''
+    return
+
 
 def test_sample_data(got, expected):
     '''Takes two arguments <got> and <expected> and performs simple tests 
