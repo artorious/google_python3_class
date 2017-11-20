@@ -97,7 +97,17 @@ def verbings(the_string):
 
     Returns the resulting string.
     '''
-    return
+    if isinstance(the_string, str):
+        the_string = the_string.strip()
+        if len(the_string) > 2:
+            if the_string.endswith('ing'):
+                return '{0}ly'.format(the_string)
+            else:
+                return '{0}ing'.format(the_string) 
+        else:
+            return the_string
+    else:
+        return 'Expected string'
 
 def not_bad(the_string):
     '''Takes one str argument <the_string>, finds the first appearance of the
@@ -108,8 +118,23 @@ def not_bad(the_string):
     Example:
         not_bad('This dinner is not that bad!') >>> 'This dinner is good!'
     '''
-    return
-
+    # TODO: Look into module re for regular expressions
+    # use pattern searching to make function more robust and handle failing tests
+    if isinstance(the_string, str) :
+        the_string = the_string.strip()
+        
+        if the_string != '':
+            not_indx, bad_indx = the_string.find('not'), the_string.find('bad')
+            if not_indx != -1 and bad_indx != -1 and bad_indx > not_indx:
+                new_string = the_string[:not_indx] + 'good' + \
+                                the_string[bad_indx + 3: ]
+                return new_string
+            else:
+                return the_string    
+        else:
+            return the_string
+    else:
+        return 'Expected string'
 
 def front_back(string_one, string_two):
     '''Takes two str arguments <string_one> and <string_two>, for each 
@@ -225,7 +250,12 @@ def sample_data():
     print()
     print(format(' Test not_bad() ', '*^60'))
     test_sample_data(not_bad('This movie is not so bad'), 'This movie is good')
+    test_sample_data(not_bad('This movie is nothing else but bad'), 'This movie is nothing else but bad')
+    test_sample_data(not_bad('This movie is nothing but the  baddest film'), 'This movie is nothing but the  baddest film')
+    test_sample_data(not_bad('This movie is not the baddest film'), 'This movie is not the baddest film')
     test_sample_data(not_bad('This dinner is not that bad!'), 'This dinner is good!')
+    test_sample_data(not_bad('This thing has me in a knot thats bad!'), 'This thing has me in a knot thats bad!')
+    test_sample_data(not_bad('This thing is not, as bad!'), 'This thing is good!')
     test_sample_data(not_bad('This tea is not hot'), 'This tea is not hot')
     test_sample_data(not_bad("It's bad yet not"), "It's bad yet not")
     test_sample_data(not_bad(''), '')
