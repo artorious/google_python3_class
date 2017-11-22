@@ -7,8 +7,8 @@ practice coding in python
 <dl>
     <dt>hello.py</dt>
     <dd>A tiny python program that checks that python3 is working.</dd>
-    <dt></dt>
-    <dd></dd>
+    <dt>string_lab.py</dt>
+    <dd>Basic exercises on strings</dd>
 </dl>
 
 # usage - on the command line (Windows, Linux &amp; Mac OS X)
