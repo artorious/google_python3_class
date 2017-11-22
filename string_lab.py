@@ -146,7 +146,26 @@ def front_back(string_one, string_two):
     Returns a string of the form, 
         string_one-front + string_two-front + string_one-back + string_two-back
     '''
-    return
+    if isinstance(string_one, str) and isinstance(string_two, str):
+        string_one, string_two = string_one.strip(), string_two.strip()
+        if len(string_one) < 2 or len(string_two) < 2:
+            return string_one + string_two
+        else: # Determine mid position for each string
+            s_one_mid = len(string_one) // 2
+            s_two_mid = len(string_two) // 2
+            # Add 1 if length is odd
+            if len(string_one) % 2 == 1: 
+                s_one_mid += 1
+            if len(string_two) % 2 == 1:
+                s_two_mid += 1
+            # Output
+            return string_one[ :s_one_mid] + string_two[ :s_two_mid] + \
+                    string_one[s_one_mid: ] + string_two[s_two_mid: ]
+
+
+            
+    else:
+        return 'Expected strings'
 
 
 def test_sample_data(got, expected):
@@ -267,11 +286,14 @@ def sample_data():
     print()
     print(format(' Test front_back() ', '*^60'))
     test_sample_data(front_back('abcd', 'xy'), 'abxcdy')
+    test_sample_data(front_back('   abcd', 'xy      '), 'abxcdy')
     test_sample_data(front_back('  abcd', 'xy     '), 'abxcdy')
     test_sample_data(front_back('abcd', '' ), 'abcd')
     test_sample_data(front_back('', 'abcd' ), 'abcd')
     test_sample_data(front_back('abcde', 'xyz'), 'abcxydez')
     test_sample_data(front_back('Kitten', 'Donut'), 'KitDontenut')
+    test_sample_data(front_back('   ', '   '), '')
+    test_sample_data(front_back('', ''), '')
     test_sample_data(front_back('abcd', 12 ), 'Expected strings')
     test_sample_data(front_back(12, 'abcd' ), 'Expected strings')
     test_sample_data(front_back([12], 'abcd' ), 'Expected strings')
