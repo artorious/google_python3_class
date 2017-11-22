@@ -185,8 +185,8 @@ def test_sample_data(got, expected):
         repr(expected)))
           
 def sample_data():
-    '''Calls functions donuts(), both_ends(), fix_start() and mix_up() with 
-    interesting inputs.
+    '''Calls functions donuts(), both_ends(), fix_start(), mix_up() verbings(), 
+    not_bad() and front_back() with interesting inputs.
     
     Uses test_sample_data() to check result against expected output
     '''
