@@ -9,9 +9,14 @@ def match_ends(words):
     '''
     count = 0
     for str_item in words:
-        if len(str_item) > 1 and str_item[0] == str_item[-1]:
-            count += 1
+        if isinstance(str_item, str):
+            str_item = str_item.strip()
+            if len(str_item) > 1 and str_item[0] == str_item[-1]:
+                count += 1
+        else:
+            return 'Expected a list of strings Exclusively'       
     return count
+ 
 
 def front_x(words):
     '''Takes a list of strings, <words>
@@ -91,6 +96,16 @@ def sample_data():
     test_sample_data(match_ends(['aba', 'xyz', 'aa', 'x', 'bbb']), 3)
     test_sample_data(match_ends(['', 'x', 'xy', 'xyx', 'xx']), 2)
     test_sample_data(match_ends(['aaa', 'be', 'abc', 'hello']), 1)
+    test_sample_data(match_ends([' aaa', 'be  ', 'abc', '     hello']), 1) # test whitespace handling
+    test_sample_data(match_ends(['    ', '          ' ]), 0)
+    test_sample_data(match_ends(['aaa', 1, 'abc', 'hello']), 
+        'Expected a list of strings Exclusively') # Test handlindling of non-string item on list
+    test_sample_data(match_ends(['aaa', ['aaa'], 'abc', 'hello']), 
+    'Expected a list of strings Exclusively')
+    test_sample_data(match_ends(['aaa', ('aaa', 'aaa'), 'abc', 'hello']), 
+    'Expected a list of strings Exclusively')
+    test_sample_data(match_ends([[1,2,3,1], ['aaa'], 'abc', 'hello']), 
+    'Expected a list of strings Exclusively')
 
     print()
     print(format(' front_x ', '*^60'))
