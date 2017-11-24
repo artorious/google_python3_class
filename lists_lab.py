@@ -7,7 +7,11 @@ def match_ends(words):
     Returns the count of the number of strings where the string length is 2 or 
     more and the first and last chars of the string are the same.
     '''
-    return
+    count = 0
+    for str_item in words:
+        if len(str_item) > 1 and str_item[0] == str_item[-1]:
+            count += 1
+    return count
 
 def front_x(words):
     '''Takes a list of strings, <words>
