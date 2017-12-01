@@ -8,11 +8,12 @@ def match_ends(words):
     more and the first and last chars of the string are the same.
     '''
     count = 0
-    for str_item in words:
-        if isinstance(str_item, str):
-            str_item = str_item.strip()
+    for item in words:
+        if isinstance(item, str):
+            str_item = item.strip()
             if len(str_item) > 1 and str_item[0] == str_item[-1]:
                 count += 1
+        
         else:
             return 'Expected a list of strings Exclusively'       
     return count
@@ -26,8 +27,20 @@ def front_x(words):
     Example:
         ['mix', 'xyz', 'apple', 'xanadu', 'aardvark'] >>> ['xanadu', 'xyz', 'aardvark', 'apple', 'mix']
     '''
-# Hint: this can be done by making 2 lists and sorting each of them before combining them.
-    return
+    alpha_list, x_list, empty_str_list = [], [], []
+    for item in words:
+        if isinstance(item, str):
+            str_item = item.strip()
+            if str_item == '':
+                empty_str_list.append(str_item)
+            elif str_item[0] == 'x' or str_item[0] == 'X' :
+                x_list.append(str_item)
+            else:
+                alpha_list.append(str_item)
+                
+        else:
+            return 'Expected a list of strings Exclusively'
+    return empty_str_list + sorted(x_list) + sorted(alpha_list)
 
 def sort_last(tuples):
     '''Takes a list of non-empty tuples, <tuples>
@@ -115,6 +128,15 @@ def sample_data():
         ['xaa', 'xcc', 'aaa', 'bbb', 'ccc'])
     test_sample_data(front_x(['mix', 'xyz', 'apple', 'xanadu', 'aardvark']),
         ['xanadu', 'xyz', 'aardvark', 'apple', 'mix'])
+    test_sample_data(front_x(['   mix', 'xyz   ', 'apple', '  xanadu', '     aardvark']),
+        ['xanadu', 'xyz', 'aardvark', 'apple', 'mix'])
+    test_sample_data(front_x(['', '    ', '  ', 'xanadu', 'aardvark']),
+        ['', '', '', 'xanadu', 'aardvark'])
+    test_sample_data(front_x(['', '', '     ', '        ']), ['', '', '', ''])
+    test_sample_data(front_x([1, 'xyz', 'apple', 'xanadu', 'aardvark']),
+        'Expected a list of strings Exclusively')
+    test_sample_data(front_x([['1'], 'xyz', 'apple', 'xanadu', 'aardvark']),
+        'Expected a list of strings Exclusively')
 
        
     print()
