@@ -18,7 +18,6 @@ def match_ends(words):
             return 'Expected a list of strings Exclusively'       
     return count
  
-
 def front_x(words):
     '''Takes a list of strings, <words>
     Returns a list with the strings in sorted order, except all the strings 
@@ -42,6 +41,11 @@ def front_x(words):
             return 'Expected a list of strings Exclusively'
     return empty_str_list + sorted(x_list) + sorted(alpha_list)
 
+def last(a_tuple):
+    '''Extracts the last element from a tuple. 
+    used for custom sorting in sort_last()'''
+    return a_tuple[-1]
+    
 def sort_last(tuples):
     '''Takes a list of non-empty tuples, <tuples>
 
@@ -50,8 +54,7 @@ def sort_last(tuples):
     Example:
         [(1, 7), (1, 3), (3, 4, 5), (2, 2)] >>> [(2, 2), (1, 3), (3, 4, 5), (1, 7)]
     '''
-# Hint: use a custom key= function to extract the last element form each tuple.
-    return
+    return sorted(tuples, key=last)
 
 def remove_adjacent(nums):
     '''Takes a list of numbers (int), <nums>.
@@ -61,7 +64,7 @@ def remove_adjacent(nums):
     Example:
         [1, 2, 2, 3] >>> [1, 2, 3].
     '''
-    return
+    return list(set(nums))
 
 def linear_merge(list1, list2):
     '''Takes two lists, <list1> and <list2> sorted in increasing order,
@@ -77,10 +80,7 @@ def linear_merge(list1, list2):
 # from each list, building a solution list which is backwards.
 # Then use reversed() to put the result back in the correct order. That
 # solution works in linear time, but is more ugly.
-    return
-
-
-
+    return sorted(list1 + list2)
 
 def test_sample_data(got, expected):
     '''Takes two arguments <got> and <expected> and performs simple tests 
@@ -96,8 +96,6 @@ def test_sample_data(got, expected):
     else:
         prefix = '  FAILED '
     print('{0} got: {1} expected: {2}'.format(prefix, repr(got), repr(expected)))
-
-
 
 def sample_data():
     '''Calls functions match_ends(), front_x(), sort_last(), remove_adjacent()
@@ -119,6 +117,7 @@ def sample_data():
     'Expected a list of strings Exclusively')
     test_sample_data(match_ends([[1,2,3,1], ['aaa'], 'abc', 'hello']), 
     'Expected a list of strings Exclusively')
+    
 
     print()
     print(format(' front_x ', '*^60'))
@@ -137,7 +136,6 @@ def sample_data():
         'Expected a list of strings Exclusively')
     test_sample_data(front_x([['1'], 'xyz', 'apple', 'xanadu', 'aardvark']),
         'Expected a list of strings Exclusively')
-
        
     print()
     print(format(' sort_last ', '*^60'))
@@ -147,6 +145,24 @@ def sample_data():
         [(3, 1), (1, 2), (2, 3)])
     test_sample_data(sort_last([(1, 7), (1, 3), (3, 4, 5), (2, 2)]),
         [(2, 2), (1, 3), (3, 4, 5), (1, 7)])
+    test_sample_data(sort_last([(1, 7), (1, 3), (3, 4, 5), (2, 2)]),
+        [(2, 2), (1, 3), (3, 4, 5), (1, 7)])
+
+    print()
+    print(format(' remove_adjacent ', '*^60'))
+    test_sample_data(remove_adjacent([1, 2, 2, 3]), [1, 2, 3])
+    test_sample_data(remove_adjacent([2, 2, 3, 3, 3]), [2, 3])
+    test_sample_data(remove_adjacent([]), [])
+
+    print()
+    print(format(' linear_merge ', '*^60'))
+    test_sample_data(linear_merge(['aa', 'xx', 'zz'], ['bb', 'cc']),
+        ['aa', 'bb', 'cc', 'xx', 'zz'])
+    test_sample_data(linear_merge(['aa', 'xx'], ['bb', 'cc', 'zz']),
+        ['aa', 'bb', 'cc', 'xx', 'zz'])
+    test_sample_data(linear_merge(['aa', 'aa'], ['aa', 'bb', 'bb']),
+        ['aa', 'aa', 'aa', 'bb', 'bb'])
+    
 
 if __name__ == '__main__':
     sample_data()
